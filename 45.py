@@ -62,7 +62,7 @@ def login_choice():
 		menu()
     except (KeyError,IOError):
 		os.system("clear")
-		print logo
+		
 		jalan('[+] Login Your Facebook Account')
 		jalan('[!] Donot Use Your Personal Account')
 		jalan('[!] Use a New Facebook Account To Login')
