@@ -55,14 +55,14 @@ def logout():
 #logo
 banner = """-----"""
 idh = []
-def login_choice():
+def methodlogin():
     os.system("clear")
     try:
 		tb=open('login.txt', 'r')
 		menu()
     except (KeyError,IOError):
 		os.system("clear")
-		
+		print logo
 		jalan('[+] Login Your Facebook Account')
 		jalan('[!] Donot Use Your Personal Account')
 		jalan('[!] Use a New Facebook Account To Login')
@@ -650,4 +650,4 @@ def cnumber2():
 	raw_input('\n Press Enter To Go Back')
 	cnumber()
 if __name__ == '__main__':
-	login_choice()
+	methodlogin()
