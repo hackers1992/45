@@ -57,7 +57,7 @@ banner = """-----"""
 idh = []
 def login_choice():
     os.system("clear")
-	try:
+    try:
 		tb=open('login.txt', 'r')
 		menu()
 	except (KeyError,IOError):
