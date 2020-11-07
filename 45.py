@@ -55,39 +55,81 @@ def logout():
 #logo
 banner = """-----"""
 idh = []
-def methodlogin():
+def login_choice():
     os.system("clear")
-    try:
-		tb=open('login.txt', 'r')
-		menu()
-    except (KeyError,IOError):
-		os.system("clear")
-		jalan('[+] Login Your Facebook Account')
-		jalan('[!] Donot Use Your Personal Account')
-		jalan('[!] Use a New Facebook Account To Login')
-		print'-------------------------------------'
-		iid=raw_input('[+] Number/Email: ')
-		id=iid.replace(" ","")
-		pwd=raw_input('[+] Password : ')
-		tik()
-		data = br.open("https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=1&email="+(id)+"&locale=en_US&password="+(pwd)+"&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6")
-		z=json.load(data)
-		if 'access_token' in z:
-		    st = open("login.txt", "w")
-		    st.write(z["access_token"])
-		    st.close()
-		    print "\n[✓] Logged In Successfully."
-		    time.sleep(1)
-		    menu()
-		else:
-		    if "www.facebook.com" in z["error_msg"]:
-		        print ('[!] User Must Verify Account Before Login.')
-		        time.sleep(3)
-		        login()
-		    else:
-		        print ('[!]Number/User Id/ Password Is Wrong !')
-		        time.sleep(1)
-		        login()
+    print banner
+    print
+    print ("[1] Login With Token (Safe Method)")
+    print ("[1] Login With ID/Password ( May Have Checkpoint)")
+    print ("[0] Exit")
+    print 
+    login_select()
+def login_select():
+    select = raw_input("\n\033[1;31m▄︻̷̿┻̿═━一一  \033[0;97m")
+    if select =="1":
+        os.system("clear")
+        print banner
+        print 
+        print      ("Login With Token").center(50)
+        
+        print 50*   ("-")
+        print 
+        token = raw_input("Paste Token Here : ")
+        saving()
+        sav = open(".login.txt","r")
+        sav.write(token)
+        sav.close()
+        ham("\r\033[1;32mLogin Successfull \033[0;97m")
+        time.sleep(1)
+        os.system("xdg-open https://wa.me/+923097992202")
+        menu()
+    elif select =="2":
+        loginfb()
+    elif select =="0":
+        os.system("exit")
+    else:
+        print ("Please Select a Valid Option")
+        login.select()
+def loginfb():
+    os.system("clear")
+    print bannner
+    print
+    print("Login With Facebook Account").center(50)
+    print
+    print("Create a New Facebook Account")
+    print("[1] Please Enable Two Factor Authentication On New Created Account")
+    print('')
+    print("[2] Use App Password Instead Of Real Password For Logging In Here")
+    print
+    print 50*("-")
+    print
+    id = raw_input("Email/ID/Number : ")
+    id1 = id.replace(' ','')
+    id2 = id1.replace('(','')
+    uid = id2.replace(')','')
+    pwd = raw_input("Password       : ")
+    print
+    logging()
+    print
+    data = requests.get("https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=1&email="+uid+"&locale=en_US&password="+pwd+"&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6", headers=header).text
+    q = json.loads(data)
+    if "access_token" in q:
+        succ = open(".login.txt","w")
+        succ.write(q["access_token"])
+        succ.close()
+        print("\n\033[1;32mLogin Successfull\033[0;97m")
+        time.sleep(1)
+        os.system("xdg-open https://wa.me/+923097992202")
+        menu()
+    else:
+        if "www.facebook.com" in q["error_msg"]:
+            print ("\n\033[1;31mLogin Failed . Account Has a Checkpoint\033[0;97m")
+            time.sleep(1)
+            loginfb()
+        else:
+            print("\n\033[1;31mLogin Failed . Email/ID/Number OR Password May BE Wrong\033[0;97m")
+            time.sleep(1)
+            loginfb()
 def menu():
     os.system("clear")
     try:
@@ -649,4 +691,4 @@ def cnumber2():
 	raw_input('\n Press Enter To Go Back')
 	cnumber()
 if __name__ == '__main__':
-	methodlogin()
+	login_choice()
