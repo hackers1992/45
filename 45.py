@@ -60,7 +60,7 @@ def login_choice():
     try:
 		tb=open('login.txt', 'r')
 		menu()
-	except (KeyError,IOError):
+		except (KeyError,IOError):
 		os.system("clear")
 		print logo
 		jalan('[+] Login Your Facebook Account')
