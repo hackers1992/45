@@ -60,7 +60,7 @@ def login_choice():
     print banner
     print
     print ("[1] Login With Token (Safe Method)")
-    print ("[1] Login With ID/Password ( May Have Checkpoint)")
+    print ("[2] Login With ID/Password ( May Have Checkpoint)")
     print ("[0] Exit")
     print 
     login_select()
